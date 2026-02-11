@@ -1,0 +1,25 @@
+# Environment variables
+.env
+.env.*
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if any local scripts)
+node_modules/
+
+# Logs
+*.log
+
+# Backups
+*.bak
+*.tmp
