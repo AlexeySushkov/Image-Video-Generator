@@ -1,0 +1,3190 @@
+{
+  "name": "Generate Images Bot v5 + DB + start",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2624,
+        1376
+      ],
+      "id": "310647c1-e4d3-4470-a579-c784e3bc9833",
+      "name": "Telegram Trigger",
+      "webhookId": "16fa6c5c-8800-4b40-bc9c-d5c29581ee21",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.file_id }}",
+        "additionalFields": {}
+      },
+      "id": "b3d958ed-5cf0-48cb-aee7-e8ae484a4c18",
+      "name": "Download Photo",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -112,
+        1296
+      ],
+      "webhookId": "131318d5-6508-4d2e-92d3-c530d2994151",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "af64685b-bc64-4a4f-a159-9d3822232f67",
+                    "leftValue": "={{ $('Set Params').item.json.tg.photo }}",
+                    "rightValue": "\"\"",
+                    "operator": {
+                      "type": "array",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "photo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f1f6430b-931e-418a-9439-a76ba0ddbcff",
+                    "leftValue": "={{ $('Set Params').item.json.tg.text }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "08b216fd-bea5-4101-9ea8-ef0814e55a52",
+                    "leftValue": "={{ $('Set Params').item.json.tg.file }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "file"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "300885b7-7f02-4676-9b49-215a0f62b818",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "edit",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "callback_edit"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec92c109-469a-4e34-a18c-b26c5a685a09",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "clear_context",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "callback_clear_context"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0de84a13-c9bf-4c04-b836-767a6b1b60fb",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "model1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "model1"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4f72acbd-905c-4d9d-8ec3-93b90962a108",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "model2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "model2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b8dc9434-e2c2-4e0f-bc72-52da8d293fdb",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "model3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "model3"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2ae8f455-89ae-40db-aff2-3c95c025d8d8",
+                    "leftValue": "={{ $('Set Params').item.json.tg.callback_data }}",
+                    "rightValue": "model4",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "model4"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -816,
+        1584
+      ],
+      "id": "d498d08f-e9c5-4d10-86ca-ed4afcbb9dca",
+      "name": "Switch message type"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d920edfa-bd82-4645-b8ba-5d69566f689a",
+              "name": "=tg.user_id",
+              "value": "={{ $json.message?.from?.id || $json.callback_query?.from?.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9d5a4d00-59af-4bc4-bf7f-5abca9f9ca0a",
+              "name": "tg.first_name",
+              "value": "={{ $json.message?.from?.first_name || $json.callback_query?.from?.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "e821095e-2173-428b-aeb7-1ab93a028a3e",
+              "name": "tg.username",
+              "value": "={{ $json.message?.from?.username || $json.callback_query?.from?.username }}",
+              "type": "string"
+            },
+            {
+              "id": "55c05b7a-defc-4dab-8c82-71db476e96f9",
+              "name": "tg.text",
+              "value": "={{$json.message?.text || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "214f3f64-7bd0-44c9-996f-21b04c678a6a",
+              "name": "tg.entities",
+              "value": "={{ $json.message?.entities[0]?.type || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "a297bf27-b353-4bad-a12d-a06dc76d4de6",
+              "name": "tg.callback_data",
+              "value": "={{ $json.callback_query.data }}",
+              "type": "string"
+            },
+            {
+              "id": "b5745a5d-e9b4-4bd0-aec4-30e7bed86cd0",
+              "name": "tg.photo",
+              "value": "={{ $json.message.photo }}",
+              "type": "array"
+            },
+            {
+              "id": "1ac24d42-9074-44c3-8c7d-40e6d52fa737",
+              "name": "tg.is_photo",
+              "value": "={{ $json.message.photo[0].file_id || \"\" }} ",
+              "type": "string"
+            },
+            {
+              "id": "8b3a4f1c-d3c9-427e-9d96-acc32f654fe7",
+              "name": "tg.file",
+              "value": "={{ $json.message.document }}",
+              "type": "object"
+            },
+            {
+              "id": "855e1b2b-d483-4f6f-a18a-a8e6c0aa9d79",
+              "name": "tg.is_file",
+              "value": "={{ $json.message.document.file_id || \"\" }} ",
+              "type": "string"
+            },
+            {
+              "id": "7bfbfe5e-963f-4b71-b385-7f23722345cb",
+              "name": "tg.caption",
+              "value": "={{ $json.message.caption || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "75a1de89-7fde-4e3e-8fcc-4f93d238a6df",
+              "name": "tg.now",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2368,
+        1376
+      ],
+      "id": "6f72fdca-0bdb-4aa1-a214-043dbc7fcd6e",
+      "name": "Set Params"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=В запросе должен быть понятный промпт и/или описаны действия со всеми изображениями из контекста!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1152,
+        2016
+      ],
+      "id": "6efeb8e0-c5ae-4ddc-945d-614ef94f66ec",
+      "name": "Send error",
+      "webhookId": "f9452b69-3f84-446b-936b-9622f621fcf8",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "={{ $('Set Params').item.json.tg.username }}, к сожалению, я вас не знаю, /start \n",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1456,
+        1664
+      ],
+      "id": "5802707c-90f6-4a20-9d77-c353a7ced39f",
+      "name": "Unknown user",
+      "webhookId": "f6e2b059-4c35-4fb6-9e92-7726b12f2922",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=439658166",
+        "text": "=Попытка использовать бота: {{ $('Set Params').item.json.tg.username }}\n",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1152,
+        1808
+      ],
+      "id": "71807933-8a62-4a4a-98ce-f3e7c0e3a2c8",
+      "name": "Send Alert",
+      "webhookId": "710f3c8c-b0dc-4f80-8c9d-4dc6051026ea",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "ImageUsers",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "keyValue": "={{ $json.tg.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -2112,
+        1376
+      ],
+      "id": "08146648-5410-4c06-9106-13e69479eaf8",
+      "name": "Get a User",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "field": "telegram_id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        -1920,
+        1376
+      ],
+      "id": "d33645f0-0c91-41f9-a63d-48e1e5afa721",
+      "name": "Summarize",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Set Params').item.json.tg.text }}",
+                    "rightValue": "/start",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c1b4f067-8979-4b81-8ec7-514f8491b3a9"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "start"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7062adde-42fb-4ff9-8262-93fb54f66557",
+                    "leftValue": "={{ $('Set Params').item.json.tg.text }}",
+                    "rightValue": "/clear_context",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "clear_context"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e70b8374-a55e-4aaf-908a-2cca6642ef8f",
+                    "leftValue": "={{ $('Set Params').item.json.tg.text }}",
+                    "rightValue": "/help",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "help"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ed12fd45-9096-4bb8-8a2c-f008fa413bc4",
+                    "leftValue": "={{ $('Set Params').item.json.tg.text }}",
+                    "rightValue": "/menu",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -448,
+        480
+      ],
+      "id": "73779ae7-689c-4f94-bc54-6d4ea9dbc877",
+      "name": "Switch Bot Command"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "319a56bd-235e-47bf-929c-91ea76d4fc32",
+                    "leftValue": "={{ $('Set Params').item.json.tg.entities }}",
+                    "rightValue": "bot_command",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "bot_command"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f1f6430b-931e-418a-9439-a76ba0ddbcff",
+                    "leftValue": "={{ $json.count_telegram_id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ok"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1664,
+        1360
+      ],
+      "id": "36782da9-0236-41d4-80f9-f5a130ca87fe",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "tableId": "ImageUsers",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "telegram_id",
+              "fieldValue": "={{ $('Set Params').item.json.tg.user_id }}"
+            },
+            {
+              "fieldId": "user_name",
+              "fieldValue": "={{ $('Set Params').item.json.tg.username }}"
+            },
+            {
+              "fieldId": "last_sign_in_at",
+              "fieldValue": "={{ $('Set Params').item.json.tg.now }}"
+            },
+            {
+              "fieldId": "model",
+              "fieldValue": "black-forest-labs/flux.2-klein-4b"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        304,
+        192
+      ],
+      "id": "dca7de7e-0e58-4950-99c0-30b36d600567",
+      "name": "Create a User",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst images = [];\n\nfor (let i = 0; i < items.length; i++) {\n  try {\n    const binaryKey = 'data';\n    \n    if (items[i].binary && items[i].binary[binaryKey]) {\n      const binaryObject = items[i].binary[binaryKey];\n      \n      // Считываем файл и кодируем в Base64\n      const buffer = await this.helpers.getBinaryDataBuffer(i, binaryKey);\n      const base64String = buffer.toString('base64');\n      \n      // Добавляем в массив для Gemini\n      images.push({\n        inlineData: {\n          mimeType: binaryObject.mimeType,\n          data: base64String\n        }\n      });\n    }\n  } catch (error) {\n    console.error('Error processing image:', error);\n  }\n}\n\n// Возвращаем один объект со всеми изображениями\nreturn [{\n  json: {\n    images: images,\n    imageCount: images.length\n  }\n}];"
+      },
+      "id": "c6608ab1-0a46-4344-84e8-c3b6e6968daa",
+      "name": "Convert bin to base64",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        1632
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first();\nlet prompt = $('Set Params').first().json.tg?.text || \"Опиши эти картинки. Ответь на русском языке.\";\n// Можно добавить инструкции\n// prompt = `${prompt}\\n\\nОтветь на русском языке.`;\n\nconst images = input.json.images || [];\n\n// Формируем content\nconst content = [\n  { type: \"text\", text: prompt }\n];\n\nfor (const img of images) {\n  content.push({\n    type: \"image_url\",\n    image_url: {\n      url: `data:${img.inlineData.mimeType};base64,${img.inlineData.data}`\n    }\n  });\n}\n\nreturn [{\n  json: {\n    model: $('Get a User').first().json.model,\n    messages: [\n      {\n        role: \"user\",\n        content: content\n      },\n    ],\n    response_format: {\n      type: \"image\",\n      image: {\n        n: 1,   // <-- ВОТ ЭТО количество картинок\n        aspect_ratio: \"4:3\"\n      }\n    },\n    //reasoning: {\n    //    effort: \"none\"\n    //},\n    generation_config: {\n      candidate_count: 1\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        1936
+      ],
+      "id": "9b69534f-c0cc-4f4c-bc14-989a6dcf94ef",
+      "name": "Prepare JSON for LLM"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Изображение добавлено в контекст",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        1200
+      ],
+      "id": "e91dc6d3-3aa4-494a-b616-9996dd45b013",
+      "name": "Photo added to context",
+      "webhookId": "bb3cdcfe-b17a-4dd8-8018-32f333b781ed",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const setParamsData = $('Set Params').first().json;\nconst photos = setParamsData.tg?.photo || [];\n\nif (photos.length > 0) {\n  const bestPhoto = photos[photos.length - 1]; // лучшее качество\n  // const bestPhoto = photos[0]; // ← первый элемент = минимальное разрешение\n\n  \n  return [{\n    json: {\n      file_id: bestPhoto.file_id,\n      width: bestPhoto.width,\n      height: bestPhoto.height,\n      file_size: bestPhoto.file_size,\n      tg: setParamsData.tg\n    }\n  }];\n}\n\nreturn [{ json: { error: 'No photos found' } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        1392
+      ],
+      "id": "c6538a8d-7b5a-43ae-af3f-c05702cc2ccf",
+      "name": "Get image with necessary size (small now)"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Контекст очищен, загрузи изображения или напиши промпт.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        352
+      ],
+      "id": "fd2a5f75-23f5-408c-ba5a-ada6db507af6",
+      "name": "Context cleared",
+      "webhookId": "10aa586a-ebb6-48d8-8c91-28dd80909ac7",
+      "executeOnce": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Контекст пустой или ошибка в получении данных из DB",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        576
+      ],
+      "id": "b6a88d76-c25f-48e0-a4aa-147ff4b1440b",
+      "name": "Context empty",
+      "webhookId": "e1f3f91b-d103-4129-8a50-7d06203d95d4",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "95fbdd03-ecc5-4bb6-b9ac-e14cf38d38ef",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -112,
+        1680
+      ],
+      "id": "ceefec4b-ab7b-4ee3-b4a5-41430a5bedc7",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка в получении фотографий из DB",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -16,
+        1856
+      ],
+      "id": "e787cd70-844b-4d0a-8543-f6723d9ea518",
+      "name": "Error Get rows",
+      "webhookId": "3edbf37d-6637-40dd-b103-c6d72b1fd62e",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Можно поменять размер вручную\nсейчас лучшее качество",
+        "height": 256,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        1328
+      ],
+      "id": "b4dd0723-f28e-4450-92e3-798a1c380064",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Создаем массив для результатов\nconst results = [];\n\n// Получаем все входящие элементы\nconst items = $input.all();\n\nfor (const item of items) {\n  try {\n    // Безопасно получаем массив изображений\n    const images = item.json.choices?.[0]?.message?.images;\n\n    if (images && Array.isArray(images) && images.length > 0) {\n      \n      // 1. Получаем количество картинок\n      const totalImages = images.length;\n\n      // 2. Берем ТОЛЬКО ПЕРВУЮ картинку\n      const firstImage = images[0];\n      const dataUrl = firstImage.image_url?.url;\n\n      if (dataUrl) {\n        // Разбиваем Data URL для получения чистого Base64 и типа файла\n        const splitData = dataUrl.split(',');\n        const base64Data = splitData[1];\n        \n        // Определяем mime-type (например, image/jpeg)\n        const mimeType = splitData[0].match(/:(.*?);/)?.[1] || 'image/png';\n        // Определяем расширение файла\n        const extension = mimeType.split('/')[1] || 'png';\n        \n        // Генерируем имя файла\n        const fileName = `generated_image_1.${extension}`;\n\n        // Формируем выходной элемент\n        results.push({\n          json: {\n            ...item.json, // Сохраняем все исходные данные\n            images_count: totalImages, // Добавляем количество картинок (число)\n            info_message: `Всего сгенерировано изображений: ${totalImages}. Возвращаю первое.`,\n            usage: $input.first().json.usage\n          },\n          binary: {\n            data: {\n              data: base64Data,\n              mimeType: mimeType,\n              fileName: fileName\n            }\n          }\n        });\n      }\n    } else {\n      // Если картинок нет, возвращаем исходный элемент с ошибкой\n      item.json.error = \"Картинки не найдены в ответе API\";\n      results.push(item);\n    }\n  } catch (error) {\n    // Логируем ошибку в выходной JSON\n    item.json.error_message = error.message;\n    results.push(item);\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        1776
+      ],
+      "id": "67c2c7ac-6535-416d-9aa7-de2cacbbeb29",
+      "name": "Prepare file for DB"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "95fbdd03-ecc5-4bb6-b9ac-e14cf38d38ef",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        400
+      ],
+      "id": "0e299a02-9e72-46a0-a8a8-fa9b7bb17208",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "={{ $json.choices[0].message.content }}\n{{ $json.error }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1696,
+        2080
+      ],
+      "id": "a9456efe-40ba-4783-870c-7c7cd9e76946",
+      "name": "Send image error",
+      "webhookId": "1dc6886a-a4f9-46dd-9a94-c998d279b82a",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка добавления изображения в контекст, попробуйте еще раз...",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        1392
+      ],
+      "id": "f9ffeaf3-574a-4bd1-8804-577c858961bc",
+      "name": "Error Photo added to context",
+      "webhookId": "91d09558-6e74-4527-8562-9cbc1139491a",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1680,
+        1840
+      ],
+      "id": "512b9464-b22d-49a6-809b-72fe5ca32fc6",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Начинаю генерацию изображения, пожалуйста подождите... ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        1472
+      ],
+      "id": "f826c060-722d-4b80-9f5f-8caa7292969e",
+      "name": "Please wait",
+      "webhookId": "652511b1-c115-4856-b949-dc3033d9f3ae",
+      "executeOnce": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://byyiwfyetzlegbowqbtn.supabase.co/storage/v1/object/{{ $('Get active images').item.json.image_name }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        224,
+        1664
+      ],
+      "id": "c101155b-f660-47d8-9990-9eb9d4824ed5",
+      "name": "HTTP Request - download photo from DB",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "Zfe1EGnJorQNpOzW",
+          "name": "VseLLM Images"
+        },
+        "httpHeaderAuth": {
+          "id": "wgg3Z1GOct9Qnmy8",
+          "name": "Header Auth for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка получения данных из DB",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        1792
+      ],
+      "id": "5b1746d7-1f48-4583-a5ab-00ac54be8ca8",
+      "name": "DB Error",
+      "webhookId": "ba503cd1-3718-4774-8bdd-59ef2d25449b",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "=Неизвестный тип данных! Для справки /help\n",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        2096
+      ],
+      "id": "c2d916ee-60ff-4470-9ce4-8fa305c6335a",
+      "name": "Unknown data type",
+      "webhookId": "a6388f31-51c1-4e58-bbdf-18a0af7ffc1d",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "=Файлы не поддерживаются, {{ $('Set Params').item.json.tg.username }}, пришли пожалуйста картинки! \n",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -256,
+        1872
+      ],
+      "id": "3173a0a6-0f96-4ee3-8d8e-23aeeb2d84ca",
+      "name": "File unsupport",
+      "webhookId": "2e35b7d9-311f-4b79-8bf3-97abcd9fe280",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка генерации изображения: {{ $('Prepare file for DB').item.json.error }}. Повторите запрос позже или начните генерацию заново или переформулируйте запрос.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1520,
+        1696
+      ],
+      "id": "b1b9d260-7116-49d1-a67b-f13e4689d351",
+      "name": "Error LLM",
+      "webhookId": "562f355b-f34f-43b1-9018-07eb3d3aa24a",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "95fbdd03-ecc5-4bb6-b9ac-e14cf38d38ef",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        704,
+        2448
+      ],
+      "id": "220d6b2e-45f0-46b7-965c-354a10145eb2",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "=Help в разработке.",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        128,
+        688
+      ],
+      "id": "7758f693-91c2-468e-bce7-88dd08c99034",
+      "name": "TODO1",
+      "webhookId": "3a404aea-269d-4d45-8f9a-f5133ea751f9",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "=Неизвестная команда: {{ $('Set Params').item.json.tg.text }}",
+        "replyMarkup": "inlineKeyboard",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        816
+      ],
+      "id": "e70b4430-a9bf-437c-a91d-004dc5ab9c70",
+      "name": "Unknown command",
+      "webhookId": "867b6992-918c-4693-9f06-b77fc61d9e5c",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "Пользователь создан, добро пожаловать! Для начала работы вызовите главное меню /menu",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        192
+      ],
+      "id": "bece24d6-51e2-4478-97a1-e0fdd8f0b9bb",
+      "name": "Create User ok",
+      "webhookId": "21a85ad7-9ad0-4ccb-989a-c48353ae6cdc",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "editMessageText",
+        "chatId": "={{ $('Get a User').first().json.telegram_id }} ",
+        "messageId": "={{ $('Telegram Trigger').item.json.callback_query.message.message_id }}",
+        "text": "Напиши, что нужно изменить в изображении или добавь новые изображения! ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -144,
+        2112
+      ],
+      "id": "d8d65e0f-670a-49dd-bfb0-ec08bdb06826",
+      "name": "Message + удаление меню",
+      "webhookId": "4c1e3b85-7f4c-4e85-8f5e-cb27ce28947b",
+      "retryOnFail": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "queryId": "={{ $('Telegram Trigger').item.json.callback_query.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        2112
+      ],
+      "id": "b9d0f293-ca60-4a32-b9cd-7219d33b6e5b",
+      "name": "Answer a callback 3",
+      "webhookId": "81188c3a-d710-40e4-b1d6-b723aab28168",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "queryId": "={{ $('Telegram Trigger').item.json.callback_query.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        2528
+      ],
+      "id": "031de6f5-9549-4e73-beb8-c16d8acf538f",
+      "name": "Answer a callback ",
+      "webhookId": "81188c3a-d710-40e4-b1d6-b723aab28168",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set Params').item.json.tg.user_id }}",
+        "text": "Пользователь уже существует! Для начала работы вызовите главное меню /menu",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7944aa5d-3a2b-4fa7-8838-5c7753d74152",
+      "name": "User exists",
+      "webhookId": "21a85ad7-9ad0-4ccb-989a-c48353ae6cdc",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/setMyCommands",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"commands\": [\n    {\n      \"command\": \"menu\",\n      \"description\": \"Главное меню\"\n    },\n    {\n      \"command\": \"start\",\n      \"description\": \"Создать пользователя\"\n    },\n    {\n      \"command\": \"clear_context\",\n      \"description\": \"Очистить контекст (новоая генерация)\"\n    },\n    {\n      \"command\": \"help\",\n      \"description\": \"Подсказка\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        192
+      ],
+      "id": "26bcde79-bc93-427c-9e8c-5cabfdc82a30",
+      "name": "Create main menu",
+      "notesInFlow": true,
+      "notes": "Нужно задать {{ $env.TELEGRAM_BOT_TOKEN }}"
+    },
+    {
+      "parameters": {
+        "content": "openai/gpt-5-image-mini - $5.79\ngoogle/gemini-2.5-flash-image - обычная Нано Банана $28.63\ngoogle/gemini-3-pro-image-preview - Pro версия $112.80\nblack-forest-labs/flux.2-klein-4b - 00.00\n\n\n\n",
+        "width": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        1408
+      ],
+      "id": "47dc9892-06a7-4715-977b-8642294b35d3",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openRouterApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        1936
+      ],
+      "id": "3ade2e8e-207b-4ceb-b43e-e9fc43aa081a",
+      "name": "Generate Image",
+      "credentials": {
+        "openRouterApi": {
+          "id": "VlxLygkLgYN8SnNE",
+          "name": "OpenRouter for Image-Video Generator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f1f6430b-931e-418a-9439-a76ba0ddbcff",
+                    "leftValue": "={{ $json.count_telegram_id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ok"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -240,
+        128
+      ],
+      "id": "746fc92a-91d5-458d-a55c-41929e8942e7",
+      "name": "User Exists ?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "950aa646-fd8c-4976-8f42-1d04bbc9bf79",
+              "name": "tg.model",
+              "value": "={{ $('Get a User').item.json.model }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1152,
+        1504
+      ],
+      "id": "9114d9bd-ed96-4397-b268-046d0518162c",
+      "name": "Set User Params"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ImageHistory",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get a User').item.json.id }}"
+            },
+            {
+              "keyName": "image_status",
+              "condition": "eq",
+              "keyValue": "active"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        1680
+      ],
+      "id": "3f39d81f-9aeb-4a45-a48b-886bdc997c3a",
+      "name": "Get active images",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageHistory",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "image_status",
+              "condition": "eq",
+              "keyValue": "active"
+            },
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get a User').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_status",
+              "fieldValue": "cleared"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        480
+      ],
+      "id": "40da13c3-d9cf-49e0-992b-d0616f2faf86",
+      "name": "image_status - cleared",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageHistory",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get a User').item.json.id }}"
+            },
+            {
+              "keyName": "image_status",
+              "condition": "eq",
+              "keyValue": "active"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_status",
+              "fieldValue": "cleared"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        2336
+      ],
+      "id": "8d869e8b-f2f6-40cd-80ef-18c49eb5e91d",
+      "name": "image_status - cleared (v2)",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageHistory",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get a User').first().json.id }}"
+            },
+            {
+              "keyName": "image_status",
+              "condition": "eq",
+              "keyValue": "active"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_status",
+              "fieldValue": "cleared"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2144,
+        1824
+      ],
+      "id": "c2b5918c-cef5-4772-b733-2bf5b0e79390",
+      "name": "Clear active images",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "={{ $json.info_message }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1520,
+        1984
+      ],
+      "id": "2f50bc35-c5d9-428a-bb41-10cfdff12c1b",
+      "name": "Send image to user!",
+      "webhookId": "70052498-230e-4fe1-a925-a1d5338f6da4",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://byyiwfyetzlegbowqbtn.supabase.co/storage/v1/object/photos/{{ Date.now() }}_{{ $binary.data.fileName }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1904,
+        1840
+      ],
+      "id": "920f8208-f77e-438d-b04a-51e6499b5865",
+      "name": "Send result image to DB storage",
+      "retryOnFail": false,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "Zfe1EGnJorQNpOzW",
+          "name": "VseLLM Images"
+        },
+        "httpHeaderAuth": {
+          "id": "wgg3Z1GOct9Qnmy8",
+          "name": "Header Auth for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка загрузки изображения в DB storage!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2096,
+        2032
+      ],
+      "id": "a5705d51-92aa-4071-8362-a05a9468c825",
+      "name": "Error DB1",
+      "webhookId": "85907bff-a588-43b5-9f50-9a13767d77a5",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка изменения состояния изображения в DB!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2432,
+        2016
+      ],
+      "id": "2c774440-19a2-4577-8753-da1f8d60417f",
+      "name": "Error DB2",
+      "webhookId": "85907bff-a588-43b5-9f50-9a13767d77a5",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Ошибка создания изображения в DB!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2752,
+        2016
+      ],
+      "id": "c074e350-8486-4b0b-90c6-4d4babd40645",
+      "name": "Error DB 3",
+      "webhookId": "85907bff-a588-43b5-9f50-9a13767d77a5",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageUsers",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Set Params').item.json.tg.user_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "model",
+              "fieldValue": "openai/gpt-5-image-mini"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        2560
+      ],
+      "id": "072e6079-74b5-420a-8fd0-deb1875101c4",
+      "name": "Model 1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Установлена модель \"ChatGPT mini\": openai/gpt-5-image-mini ($5.79 за 1 млн. токенов)",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        64,
+        2560
+      ],
+      "id": "f61e036a-ef92-45d9-9670-72d97e53b3f1",
+      "name": "Info 1",
+      "webhookId": "3edbf37d-6637-40dd-b103-c6d72b1fd62e",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageUsers",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Set Params').item.json.tg.user_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "model",
+              "fieldValue": "google/gemini-2.5-flash-image"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        2752
+      ],
+      "id": "2187316a-bf82-480d-bd2a-48a92ed0fc10",
+      "name": "Model 2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Установлена модель \"Nano Banana\": google/gemini-2.5-flash-image ($28.63 за 1 млн. токенов)",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        2752
+      ],
+      "id": "6ee14376-de7f-49aa-9346-2f1ae569a0f0",
+      "name": "Info 2",
+      "webhookId": "3edbf37d-6637-40dd-b103-c6d72b1fd62e",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageUsers",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Set Params').item.json.tg.user_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "model",
+              "fieldValue": "google/gemini-3-pro-image-preview"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        2976
+      ],
+      "id": "6a26019a-c842-42ad-a3bf-e0e91356d2c2",
+      "name": "Model 3",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Установлена модель \"Nano Banana Pro\": google/gemini-3-pro-image-preview ($112.80 за 1 млн.токенов)",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        2976
+      ],
+      "id": "b378f848-345d-465b-a0e4-2f871452e536",
+      "name": "Info 3",
+      "webhookId": "3edbf37d-6637-40dd-b103-c6d72b1fd62e",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ImageUsers",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Set Params').item.json.tg.user_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "model",
+              "fieldValue": "black-forest-labs/flux.2-klein-4b"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        3184
+      ],
+      "id": "e575758d-37f2-432d-acce-2b4b8929af0c",
+      "name": "Model 4",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Установлена модель \"Fast\": \"black-forest-labs/flux.2-klein-4b\"",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        3184
+      ],
+      "id": "c01b4465-d24c-4b0a-85ef-db5bb046ba4c",
+      "name": "Info 4",
+      "webhookId": "3edbf37d-6637-40dd-b103-c6d72b1fd62e",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31f1e241-cf9b-46b5-a457-e11623ab5da9",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1280,
+        1776
+      ],
+      "id": "fa5aedbd-fcbb-4fb7-9f57-60509ca6c722",
+      "name": "Check Error"
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "Изображение без сжатия"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1552,
+        2304
+      ],
+      "id": "e6b0e0cb-617c-4b60-a8f4-2314a4f35b36",
+      "name": "Send a file",
+      "webhookId": "deb3599e-d75c-4681-9a0e-1a446f54e522",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }}",
+        "text": "=Send file error: {{ $json.error }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1824,
+        2320
+      ],
+      "id": "76182caf-b405-4f03-8527-6f0a2b0f4852",
+      "name": "Send file error",
+      "webhookId": "63ec51a8-2a9c-4b9a-b0ca-8802b4c6044b",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://byyiwfyetzlegbowqbtn.supabase.co/storage/v1/object/photos/{{ Date.now() }}_{{ $binary.data.fileName }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        112,
+        1296
+      ],
+      "id": "515e1d64-318f-4661-bb8c-5e06aed1576d",
+      "name": "Send image to DB storage",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "Zfe1EGnJorQNpOzW",
+          "name": "VseLLM Images"
+        },
+        "httpHeaderAuth": {
+          "id": "wgg3Z1GOct9Qnmy8",
+          "name": "Header Auth for ImageVideoGenerator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "ImageHistory",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Get a User').item.json.id }}"
+            },
+            {
+              "fieldId": "prompt",
+              "fieldValue": "={{ $('Set Params').first().json.tg.text || $('Set Params').first().json.tg.photo_caption || \"\" }}"
+            },
+            {
+              "fieldId": "image_id",
+              "fieldValue": "={{ $json.Id }}"
+            },
+            {
+              "fieldId": "image_name",
+              "fieldValue": "={{ $json.Key }}"
+            },
+            {
+              "fieldId": "image_status",
+              "fieldValue": "active"
+            },
+            {
+              "fieldId": "image_type",
+              "fieldValue": "context"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        336,
+        1296
+      ],
+      "id": "84998d65-a0b9-44a6-9d5e-2adaa7469069",
+      "name": "Create context image",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "ImageHistory",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Get a User').first().json.id }}"
+            },
+            {
+              "fieldId": "prompt",
+              "fieldValue": "={{ $('Set Params').first().json.tg.text || $('Set Params').first().json.tg.photo_caption || \"\" }}"
+            },
+            {
+              "fieldId": "image_id",
+              "fieldValue": "={{ $('Send result image to DB storage').item.json.Id }}"
+            },
+            {
+              "fieldId": "image_name",
+              "fieldValue": "={{ $('Send result image to DB storage').item.json.Key }}"
+            },
+            {
+              "fieldId": "image_status",
+              "fieldValue": "active"
+            },
+            {
+              "fieldId": "image_type",
+              "fieldValue": "result"
+            },
+            {
+              "fieldId": "usage",
+              "fieldValue": "={{ $('Prepare file for DB').item.json.usage }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        1808
+      ],
+      "id": "b944f6dc-23c0-4ea5-8a4a-eb261f380786",
+      "name": "Create result image",
+      "executeOnce": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "Z1UYTqDLcqu0rYkP",
+          "name": "Supabase for ImageVideoGenerator"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Get a User').first().json.telegram_id }} ",
+        "text": "Напиши, что нужно сделать:",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Новая генерация",
+                    "additionalFields": {
+                      "callback_data": "clear_context"
+                    }
+                  },
+                  {
+                    "text": "Продолжить редактирование",
+                    "additionalFields": {
+                      "callback_data": "edit"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Nano Banana",
+                    "additionalFields": {
+                      "callback_data": "model2"
+                    }
+                  },
+                  {
+                    "text": "Nano Banana Pro",
+                    "additionalFields": {
+                      "callback_data": "model3"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "ChatGPT mini",
+                    "additionalFields": {
+                      "callback_data": "model1"
+                    }
+                  },
+                  {
+                    "text": "Fast",
+                    "additionalFields": {
+                      "callback_data": "model4"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2704,
+        1792
+      ],
+      "id": "6838d58a-8b22-4813-9d2b-b93833f9ec7a",
+      "name": "Create Main menu1",
+      "webhookId": "513330ee-88f1-4db0-bab7-5eb591b59fc2",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "editMessageText",
+        "chatId": "={{ $('Get a User').first().json.telegram_id }} ",
+        "messageId": "={{ $('Telegram Trigger').item.json.callback_query.message.message_id }}",
+        "text": "Контекст очищен, загрузи изображения или напиши промпт.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        2416
+      ],
+      "id": "5c285af6-c843-46c1-970c-cecb172fc7d8",
+      "name": "Cleared + удаление меню",
+      "webhookId": "4c1e3b85-7f4c-4e85-8f5e-cb27ce28947b",
+      "retryOnFail": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "editMessageText",
+        "chatId": "={{ $('Get a User').first().json.telegram_id }} ",
+        "messageId": "={{ $('Telegram Trigger').item.json.callback_query.message.message_id }}",
+        "text": "Контекст пустой или ошибка в получении данных из DB",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1152,
+        2688
+      ],
+      "id": "427c15b1-1788-4fdc-9905-81a02e8d4918",
+      "name": "Empty + удаление меню",
+      "webhookId": "4c1e3b85-7f4c-4e85-8f5e-cb27ce28947b",
+      "retryOnFail": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "queryId": "={{ $('Telegram Trigger').item.json.callback_query.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        512,
+        2912
+      ],
+      "id": "7668be38-0a7d-479a-b8ec-b7c0a6c6e4cc",
+      "name": "Answer a callback 4",
+      "webhookId": "81188c3a-d710-40e4-b1d6-b723aab28168",
+      "credentials": {
+        "telegramApi": {
+          "id": "tCE1GgYNMyUxDOUs",
+          "name": "Telegram Image Video Generator"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### {{ $env.TELEGRAM_BOT_TOKEN }}",
+        "height": 208,
+        "width": 336,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        160
+      ],
+      "id": "dc1105b7-f447-41b7-b679-8548ca75768b",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Photo": {
+      "main": [
+        [
+          {
+            "node": "Send image to DB storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Params": {
+      "main": [
+        [
+          {
+            "node": "Get a User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch message type": {
+      "main": [
+        [
+          {
+            "node": "Get image with necessary size (small now)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get active images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "File unsupport",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Message + удаление меню",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "image_status - cleared (v2)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Model 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Model 2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Model 3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Model 4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unknown data type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unknown user": {
+      "main": [
+        [
+          {
+            "node": "Send Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a User": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Switch Bot Command",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set User Params",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unknown user",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Bot Command": {
+      "main": [
+        [
+          {
+            "node": "User Exists ?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "image_status - cleared",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "TODO1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Main menu1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unknown command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert bin to base64": {
+      "main": [
+        [
+          {
+            "node": "Prepare JSON for LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare JSON for LLM": {
+      "main": [
+        [
+          {
+            "node": "Generate Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get image with necessary size (small now)": {
+      "main": [
+        [
+          {
+            "node": "Download Photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a User": {
+      "main": [
+        [
+          {
+            "node": "Create User ok",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Please wait",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request - download photo from DB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Please wait",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prepare JSON for LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare file for DB": {
+      "main": [
+        [
+          {
+            "node": "Check Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Context cleared",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Context empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Send result image to DB storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - download photo from DB": {
+      "main": [
+        [
+          {
+            "node": "Convert bin to base64",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DB Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Cleared + удаление меню",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Empty + удаление меню",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message + удаление меню": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create main menu": {
+      "main": [
+        [
+          {
+            "node": "Create a User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image": {
+      "main": [
+        [
+          {
+            "node": "Prepare file for DB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Exists ?": {
+      "main": [
+        [
+          {
+            "node": "User exists",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create main menu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set User Params": {
+      "main": [
+        [
+          {
+            "node": "Switch message type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get active images": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Get rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image_status - cleared": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Context empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image_status - cleared (v2)": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Empty + удаление меню",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send image to user!": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Send image error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send result image to DB storage": {
+      "main": [
+        [
+          {
+            "node": "Clear active images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error DB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clear active images": {
+      "main": [
+        [
+          {
+            "node": "Create result image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error DB2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Model 1": {
+      "main": [
+        [
+          {
+            "node": "Info 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Model 2": {
+      "main": [
+        [
+          {
+            "node": "Info 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Model 3": {
+      "main": [
+        [
+          {
+            "node": "Info 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Model 4": {
+      "main": [
+        [
+          {
+            "node": "Info 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Error": {
+      "main": [
+        [
+          {
+            "node": "Error LLM",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send image to user!",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a file": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send file error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send image to DB storage": {
+      "main": [
+        [
+          {
+            "node": "Create context image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create context image": {
+      "main": [
+        [
+          {
+            "node": "Photo added to context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Photo added to context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create result image": {
+      "main": [
+        [
+          {
+            "node": "Create Main menu1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error DB 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleared + удаление меню": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info 1": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info 2": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info 3": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info 4": {
+      "main": [
+        [
+          {
+            "node": "Answer a callback 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c5353dd4-9735-4e8b-8024-047c63a3f890",
+  "meta": {
+    "instanceId": "f4300700b5a89163b88ad6a908ff9e3076c705e8b03a3f40f03ff2f29f7e4289"
+  },
+  "id": "GU0ib2ENEGS9Xc17",
+  "tags": []
+}
